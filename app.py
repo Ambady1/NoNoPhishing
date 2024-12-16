@@ -65,13 +65,17 @@ def predict_phishing(url, uploaded_file):
     result = "Phishing" if final_prediction[0] == 1 else "Legitimate"
     if result == "Phishing":
         st.markdown(f"<h1 style='text-align: center; color: red;'>🚨 {result.upper()} 🚨</h1>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='text-align: center; color: red;'>Dont click that link, Bad boys tryna fool you</h2>", unsafe_allow_html=True)
+
     else:
         st.markdown(f"<h1 style='text-align: center; color: green;'>✅ {result.upper()} ✅</h1>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='text-align: center; color: green;'>Phewww!!! This one's safe</h2>", unsafe_allow_html=True)
+
 
 
 
 # Streamlit App Main Code
-st.title("Phishing Detection App")
+st.title("NoNoPhishing🚫")
 st.write("Enter a URL and upload the HTML file to determine if it's phishing or legitimate.")
 
 # Step 1: Input a URL
