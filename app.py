@@ -40,8 +40,11 @@ def predict_phishing(url):
     Streamlit-based prediction: Determines if a website is phishing or legitimate.
     """
     # Download the HTML
+    headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url,headers=headers,timeout=10)
         response.raise_for_status()  # Raise HTTPError for bad responses (4xx and 5xx)
         html_content = response.text
     except requests.exceptions.RequestException as e:
