@@ -10,7 +10,8 @@ import joblib
 import requests
 
 # Load Models
-urlnet_model = load_model("urlnet_model.h5")
+urlnet_model = load_model("urlnet_model.h5", compile=False)
+urlnet_model.compile()  # Suppress warnings, ensure proper configuration
 htmlphish_model = load_model("htmlphish_model.h5")
 dom2vec_model = Doc2Vec.load("dom2vec_model")
 stacking_model = joblib.load("stacking_model.pkl")
