@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import numpy as np
 import re
 import joblib
+import requests
 
 # Load Models
 urlnet_model = load_model("urlnet_model.h5")
