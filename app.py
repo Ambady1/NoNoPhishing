@@ -48,7 +48,7 @@ def predict_phishing(url):
         response.raise_for_status()  # Raise HTTPError for bad responses (4xx and 5xx)
         html_content = response.text
     except requests.exceptions.RequestException as e:
-        st.error(f"Failed to fetch HTML content from the URL. Error: {e}")
+        st.error(f"Sorry this website prevents downloading html content and hence the prediction failed. Error: {e}")
         return
     
     # Preprocess URL
