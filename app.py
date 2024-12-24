@@ -34,16 +34,24 @@ def preprocess_html(html_content, max_length=500):
 
 
 # Streamlit App
-def predict_phishing(url, uploaded_file):
+def predict_phishing(url):
     """
     Streamlit-based prediction: Determines if a website is phishing or legitimate.
     """
+    # Download the HTML
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()  # Raise HTTPError for bad responses (4xx and 5xx)
+        html_content = response.text
+    except requests.exceptions.RequestException as e:
+        st.error(f"Failed to fetch HTML content from the URL. Error: {e}")
+        return
+    
     # Preprocess URL
     url_sequence = preprocess_url([url])
     pred_urlnet = urlnet_model.predict(url_sequence).flatten()[0]
 
     # Preprocess HTML content
-    html_content = uploaded_file.getvalue().decode("utf-8")
     html_sequence = preprocess_html(html_content)
     pred_htmlphish = htmlphish_model.predict(html_sequence).flatten()[0]
 
@@ -76,18 +84,15 @@ def predict_phishing(url, uploaded_file):
 
 # Streamlit App Main Code
 st.title("NoNoPhishing🚫")
-st.write("Enter a URL and upload the HTML file to determine if it's phishing or legitimate.")
+st.write("Enter a URL to determine if it's phishing or legitimate. The AI will analyze the url, html content and dom tree to predict if its a phishing link or not😉")
 
 # Step 1: Input a URL
 url = st.text_input("Enter the URL:")
 
-# Step 2: Upload an HTML file
-uploaded_file = st.file_uploader("Upload the HTML file:", type=["html"])
-
 # Step 3: Trigger Prediction
 if st.button("Check for Phishing"):
-    if url and uploaded_file:
+    if url:
         # result, pred_urlnet, pred_htmlphish, dom_tree = predict_phishing(url, uploaded_file)
-        predict_phishing(url, uploaded_file)
+        predict_phishing(url)
     else:
-        st.warning("Please provide both a URL and an HTML file.")
+        st.warning("Please enter a URL.")
