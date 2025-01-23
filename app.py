@@ -10,7 +10,7 @@ import joblib
 import requests
 
 # Load Models
-urlnet_model = load_model("urlnet_model_updated.keras")
+urlnet_model = load_model("urlnet_model.h5")
 htmlphish_model = load_model("htmlphish_model_updated.keras")
 dom2vec_model = Doc2Vec.load("dom2vec_model")
 stacking_model = joblib.load("stacking_model.pkl")
