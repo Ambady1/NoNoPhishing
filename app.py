@@ -11,7 +11,7 @@ import requests
 
 # Load Models
 urlnet_model = load_model("urlnet_model.h5")
-htmlphish_model = load_model("htmlphish_model_updated.keras")
+htmlphish_model = load_model("htmlphish_model.h5")
 dom2vec_model = Doc2Vec.load("dom2vec_model")
 stacking_model = joblib.load("stacking_model.pkl")
 
