@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_js_eval import streamlit_js_eval
 from tensorflow.keras.models import load_model  # type: ignore[import]
 from tensorflow.keras.utils import pad_sequences  # type: ignore[import]
 import os
@@ -102,7 +103,7 @@ else:
 button_label = "Check for Phishing" if not st.session_state.predicted else "Check Another"
 if st.button(button_label):
     if st.session_state.predicted:  # Reset for a new prediction
-        st.experimental_rerun()
+        streamlit_js_eval(js_expressions="parent.window.location.reload()")
     elif url:
         predict_phishing(url)
     else:
