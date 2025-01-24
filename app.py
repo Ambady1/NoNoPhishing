@@ -12,8 +12,8 @@ import requests
 # Load Models
 urlnet_model = load_model("urlnet_model.h5",compile=False)
 htmlphish_model = load_model("htmlphish_model.h5", compile=False)
-dom2vec_model = Doc2Vec.load("dom2vec_model",compile=False)
-stacking_model = joblib.load("stacking_model.pkl",compile=False)
+dom2vec_model = Doc2Vec.load("dom2vec_model")
+stacking_model = joblib.load("stacking_model.pkl")
 
 # Preprocess URL Function
 
