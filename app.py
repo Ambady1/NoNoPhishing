@@ -47,7 +47,7 @@ def predict_phishing(url):
         html_content = response.text
     except requests.exceptions.RequestException as e:
         st.error(f"Sorry, this website prevents downloading HTML content and hence the prediction failed. Error: {e}")
-        st.session_state.predicted = False
+        st.session_state.predicted = True
         return
 
     # Preprocess URL
